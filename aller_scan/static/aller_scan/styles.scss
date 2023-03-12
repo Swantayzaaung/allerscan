@@ -1,0 +1,24 @@
+:root {
+    --dark-blue: #003764;
+    --green: #3bd4ae;
+    --light-blue: #1cc9f7;
+    --red: #ff647d;
+    --purple: #b14fc5;
+    --orange: #ff7f30;
+    --yellow: #e1d355;
+    --darker-blue: #004764;
+}
+.navbar, .footer {
+    background-color: var(--dark-blue);
+    border-radius: 0;
+}
+.footer {
+    color: whitesmoke;
+    padding: 1.5rem;
+    text-align: center;
+}
+.navbar-nav {
+    a {
+        color: white;
+    }
+}
