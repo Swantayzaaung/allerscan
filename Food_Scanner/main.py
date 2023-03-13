@@ -59,10 +59,12 @@ class Allergy():
         # text = text.replace("\n" , "")
         print(self.text)
 
-    # out facts about allergies info
+    # output facts about allergies info
     def chatgpt(self):
-        openai.organization = "org-7au1QHtRyvWumtZM9U8MGziQ"
+        #Note: you need to you use own Api
+        openai.organization = "org-7au1QHtRyvWumtZM9U8MGziQ" 
         openai.api_key = "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"#os.getenv("OPENAI_API_KEY")
+        
         messages = [
             {"role": "system", "content": "You are a kind helpful assistant."},
         ]
