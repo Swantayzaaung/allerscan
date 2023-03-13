@@ -1,4 +1,4 @@
-#Made by Thaw Zin Thant , Ai dev for Byte Busters (Hub and Hack 2023 competition)
+#Made by Thaw Zin Thant , Ai dev at Byte Busters team (Hub and Hack 2023 competition)
 
 import pytesseract
 import cv2
@@ -61,8 +61,7 @@ class Allergy():
 
     # output facts about allergies info
     def chatgpt(self):
-        #Note: you need to you use own Api
-        openai.organization = "org-7au1QHtRyvWumtZM9U8MGziQ" 
+        #Note: you need to you use your own Api
         openai.api_key = "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"#os.getenv("OPENAI_API_KEY")
         
         messages = [
