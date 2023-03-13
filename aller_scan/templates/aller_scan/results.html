@@ -7,5 +7,16 @@
         Return to main page
     </button>
 </a>
-<img src="{{ file_url }}">
+<br> <hr>
+<table class="result">
+    <tr>
+        <td>
+            <img src="{{ img_url }}">
+        </td>
+        <td id="result-text">
+            <h1>Results</h1>
+            <p>{{ answer | safe }}</p>
+        </td>
+    </tr>
+</table>
 {% endblock %}

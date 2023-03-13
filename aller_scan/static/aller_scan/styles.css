@@ -1,23 +1,50 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins&display=swap");
 :root {
   --dark-blue: #003764;
   --green: #3bd4ae;
   --dark-green: #165116;
   --lime: #a4faa3;
   --light-blue: #00aede;
+  --light-blue2: #1CC9F7;
   --red: #ff647d;
   --purple: #b14fc5;
   --orange: #ff7f30;
   --yellow: #e1d355;
   --dark-blue2: #004764;
+  --dark-blue3: #13005A;
+  --green-2: #19FEC5;
 }
 
 body {
   background-image: linear-gradient(to top right, var(--green), var(--light-blue));
   font-size: 14pt;
+  font-family: "Poppins", sans-serif;
+}
+
+.result img {
+  max-width: 50vw;
+}
+.result td {
+  padding: 1rem;
+}
+.result #result-text {
+  vertical-align: top;
+}
+.result #result-text p {
+  height: 19rem;
+  overflow-y: scroll;
+  border: 1px solid var(--dark-blue);
+  padding: 2rem 1rem;
 }
 
 h1 {
   color: var(--dark-blue);
+  font-weight: bold;
+}
+
+hr {
+  border-width: 2px;
+  border-color: var(--dark-blue2);
 }
 
 .navbar, .footer {
@@ -62,7 +89,7 @@ h1 {
   font-size: 20pt;
 }
 .navbar-nav .btn {
-  margin: 0 3rem;
+  margin: 0 0.5rem;
 }
 
 .navbar-header, .navbar2 {

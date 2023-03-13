@@ -5,6 +5,7 @@ import cv2
 import numpy as np
 import os
 import openai
+from .KEY import API_KEY
 
 #instruction to run my code
 
@@ -16,10 +17,9 @@ import openai
 # https://www.projectpro.io/recipes/what-is-pytesseract-python-library-and-do-you-install-it
 
 #to run pytessract for window users , you need to add path file of ur tessract program
-# path_to_tesseract = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+path_to_tesseract = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 
 text = """"""
-img_path = 'sampleImages/sample1.jpg' #image path for testing
 
 class Allergy():
     
@@ -56,12 +56,12 @@ class Allergy():
 
         self.text = pytesseract.image_to_string(img, config=config)
         # text = text.replace("\n" , "")
-        print(self.text)
+        # print(self.text)
 
     # output facts about allergies info
     def chatgpt(self):
         #Note: you need to you use your own Api
-        openai.api_key = "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"#os.getenv("OPENAI_API_KEY")
+        openai.api_key = API_KEY#"#os.getenv("OPENAI_API_KEY")
         
         messages = [
             {"role": "system", "content": "You are a kind helpful assistant."},
@@ -71,20 +71,20 @@ class Allergy():
         
         if message:
             messages.append(
-                {"role": "user", "content": f"Show possible Allergies of : {message}"},
+                {"role": "user", "content": f"If it contains the word Ingredients, use at lesat 5 explanations to show possible Allergies of : {message}"},
             )
             chat = openai.ChatCompletion.create(
                 model="gpt-3.5-turbo", messages=messages
             )
 
         reply = chat.choices[0].message.content
-        print(f"ChatGPT: {reply}")
-        messages.append({"role": "assistant", "content": reply})
+        return reply
+        # messages.append({"role": "assistant", "content": reply})
 
-if __name__ == '__main__':
-    aller = Allergy()
-    aller.img_to_text(img_path) # change path 
-    aller.chatgpt()
+# if __name__ == '__main__':
+#     aller = Allergy()
+#     aller.img_to_text(img_path) # change path 
+#     aller.chatgpt()
                
 
  
