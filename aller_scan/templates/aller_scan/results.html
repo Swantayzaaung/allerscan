@@ -1,0 +1,11 @@
+{% extends 'aller_scan/layout.html' %}
+{% load static %}
+
+{% block body %}
+<a href="{% url 'index' %}">
+    <button class="btn btn-dark-blue">
+        Return to main page
+    </button>
+</a>
+<img src="{{ file_url }}">
+{% endblock %}

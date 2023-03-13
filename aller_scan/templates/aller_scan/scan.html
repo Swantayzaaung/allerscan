@@ -1,0 +1,63 @@
+{% extends "aller_scan/layout.html" %}
+{% load static %}
+
+{% block title %}Scan{% endblock %}
+
+{% block body %}
+<h1>Upload an image of the food label</h1>
+<div id="upload">
+    <div id="upload-2">
+        <!-- Credit to W3Schools for the Custom Form CSS -->
+        <form action="{% url 'scan' %}" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="custom-file">
+                <input type=file name="file" id="file" class="custom-file-input" accept="image/*">
+                <label id="file-label" class="custom-file-label" for="file">Upload Image</label>
+            </div>
+            <br> <br>
+            <div id="confirm" style="text-align: center;">
+                <div id="cancel" class="btn btn-red">Cancel</div>
+                <input type="submit" class="btn btn-dark-blue" value="Upload!">
+            </div>
+            <script>
+                var file = document.getElementById("file");
+                var confirm = document.getElementById('confirm');
+                var cancel = document.getElementById('cancel');
+                var fileLabel = document.getElementById('file-label');
+
+                confirm.style.display = 'none' 
+                file.addEventListener('change', () => {
+                    confirm.style.display = file.files.length ? '' : 'none';
+                    fileLabel.innerHTML = file.files[0].name;
+                });
+
+                cancel.addEventListener('click', () => {
+                    file.value = '';
+                    fileLabel.innerHTML = "Upload Image";
+                    confirm.style.display = 'none';
+                })
+            </script>
+        </form>
+    </div>
+</div>
+<!-- <h1>How to use this app</h1>
+<ol>
+    <li>Take a photo of the label on the food package (the one with the “ingredients” text)</li>
+    <li>Click Post image and select the image.</li>
+    <li>Wait for the results.</li>
+</ol> -->
+<table class="heroblock">
+    <tr>
+        <td>
+            <h2>Don't take a picture of the main object</h2>
+        </td>
+        <td class="food-cell"><img src="{% static 'aller_scan/no juice.png' %}"></td>
+    </tr>
+    <tr>
+        <td>
+            <h2>Take a picture of the ingredients list</h2>
+        </td>
+        <td class="food-cell"><img src="{% static 'aller_scan/ing list.png' %}"></td>
+    </tr>
+</table>
+{% endblock %}

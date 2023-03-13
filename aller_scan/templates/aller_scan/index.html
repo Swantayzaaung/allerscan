@@ -1,8 +1,35 @@
 {% extends "aller_scan/layout.html" %}
+{% load static %}
 
-{% block title %}Home{% endblock %}
+{% block title %}
+    Home
+{% endblock %}
 
 {% block body %}
-<h1>Hello world</h1>
+<table class="heroblock">
+    <tr>
+        <td style="text-align:center">
+            <img id="hero-1" src="{% static 'aller_scan/foodlist.png' %}" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" loading="lazy">
+        </td>
+        <td width="60%">
+            <h1 class="display-5 fw-bold lh-1 mb-3">Get Food Information</h1>
+            <p class="lead">Allerscan is a web app that allows a user to take pictures of their packaged food's nutrition labels and find out what food items may have a potential risk of allergy. It aids doctors in discovering safety solutions and preventions to a problem that could easily go unnoticed.</p>
+            <a href="{% url 'scan' %}">
+                <button class="btn btn-dark-blue">Scan now!</button>
+            </a>
+        </td>
+    </tr>
+</table>
+<table class="heroblock">
+    <tr>
+        <td width="60%">
+            <h1 class="display-5 fw-bold lh-1 mb-3">Our mission</h1>
+            <p class="lead">To educate, inform, help and promote healthy diet among doctors, so they could easily use this application to find related information on particular food by scanning its ingredients labels.</p>
+        </td>
+        <td style="text-align: center">
+            <img id="hero-2" src="{% static 'aller_scan/foodlist.png' %}" class="d-block mx-lg-auto img-fluid" alt="Bootstrap Themes" loading="lazy">
+        </td>
+    </tr>
+</table>
 {% endblock %}
 
