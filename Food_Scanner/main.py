@@ -18,7 +18,6 @@ import openai
 #to run pytessract for window users , you need to add path file of ur tessract program
 # path_to_tesseract = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
 
-# varible
 text = """"""
 img_path = 'sampleImages/sample1.jpg' #image path for testing
 
