@@ -2,6 +2,7 @@ Food scanner web application that outputs allergies by scanning ingredients fact
 
 How to install food_scanner python module 
 
+
 ```
 pip install food_scanner
 ```
