@@ -1,0 +1,24 @@
+[package]
+name = "food_scanner"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+[lib]
+name = "food_scanner"
+crate-type = ["cdylib"]
+
+[dependencies]
+
+pyo3 = "0.18.1"
+pyo3-asyncio = { version = "0.18", features = ["attributes", "async-std-runtime"] }
+async-std = "1.9"
+
+serde = "^1.0"
+serde_json = "^1.0"
+
+tokio = { version = "1.27.0", features = ["full"] }
+leptess="0.14.0"
+chat-gpt-lib-rs = "0.1.7"
+tesseract-plumbing = "0.9.0"
+thiserror = "1.0.30"
