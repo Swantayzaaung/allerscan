@@ -4,8 +4,22 @@
 {% block title %}About{% endblock %}
 
 {% block body %}
-<div class="d-flex flex-wrap">
-    <div>
-    </div>
+<div>
+    <h1>About AllerScan</h1>
+    <p class="lead">
+        AllerScan helps identify possible allergy risks by scanning ingredient labels from food packaging.
+        Our goal is to make ingredient checking faster and easier for everyday users and healthcare teams.
+    </p>
+
+    <hr>
+
+    <h2>Team Members</h2>
+    <ul>
+        {% for member in members %}
+            <li><strong>{{ member.name }}</strong> - {{ member.role }}</li>
+        {% empty %}
+            <li>No team members added yet.</li>
+        {% endfor %}
+    </ul>
 </div>
 {% endblock %}

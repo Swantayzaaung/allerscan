@@ -1,0 +1,6 @@
+django==4.1.4
+numpy
+opencv-python
+openai==0.28.1
+pytesseract
+python-dotenv

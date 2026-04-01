@@ -5,19 +5,12 @@ import cv2
 import numpy as np
 import os
 import openai
-from .KEY import API_KEY
+from dotenv import load_dotenv
 
-#instruction to run my code
+load_dotenv()
 
-#pip install openai
-#pip install numpy
-#pip install opecv-python
-
-#instruction link for installing and setting pytesseract in ur window system
-# https://www.projectpro.io/recipes/what-is-pytesseract-python-library-and-do-you-install-it
-
-#to run pytessract for window users , you need to add path file of ur tessract program
-path_to_tesseract = r"C:\Program Files\Tesseract-OCR\tesseract.exe"
+path_to_tesseract = os.getenv("TESSERACT_CMD", r"C:\Program Files\Tesseract-OCR\tesseract.exe")
+pytesseract.pytesseract.tesseract_cmd = path_to_tesseract
 
 text = """"""
 
@@ -55,13 +48,11 @@ class Allergy():
         img = cv2.erode(img, kernel, iterations=1)
 
         self.text = pytesseract.image_to_string(img, config=config)
-        # text = text.replace("\n" , "")
-        # print(self.text)
 
-    # output facts about allergies info
     def chatgpt(self):
-        #Note: you need to you use your own Api
-        openai.api_key = API_KEY#"#os.getenv("OPENAI_API_KEY")
+        openai.api_key = os.getenv("OPENAI_API_KEY")
+        if not openai.api_key:
+            raise ValueError("OPENAI_API_KEY is not set. Add it in your .env file.")
         
         messages = [
             {"role": "system", "content": "You are a kind helpful assistant."},
@@ -71,7 +62,7 @@ class Allergy():
         
         if message:
             messages.append(
-                {"role": "user", "content": f"If it contains the word Ingredients, use at lesat 5 explanations to show possible Allergies of : {message}"},
+                {"role": "user", "content": f"If it contains the word Ingredients, use at least 5 explanations to show possible Allergies of : {message}"},
             )
             chat = openai.ChatCompletion.create(
                 model="gpt-3.5-turbo", messages=messages
@@ -79,12 +70,3 @@ class Allergy():
 
         reply = chat.choices[0].message.content
         return reply
-        # messages.append({"role": "assistant", "content": reply})
-
-# if __name__ == '__main__':
-#     aller = Allergy()
-#     aller.img_to_text(img_path) # change path 
-#     aller.chatgpt()
-               
-
- 

@@ -44,5 +44,4 @@ def detect_allergens(img_path):
     return reply
 
 def about(request):
-
-    return render(request, "aller_scan/about.html")
+    return render(request, "aller_scan/about.html", {"members": MEMBERS})
