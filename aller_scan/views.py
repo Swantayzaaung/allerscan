@@ -1,10 +1,7 @@
 import os
 from django.core.files.storage import FileSystemStorage 
 from django.shortcuts import render
-from django.http import HttpResponseRedirect
-from .forms import UploadFileForm
 from .foodscanner import Allergy
-from pathlib import Path
 
 MEMBERS = [
     {"name": "Kaung Pyae Htet", "role": "Leader"},
@@ -28,8 +25,8 @@ def scan(request):
         file_url = os.path.abspath(os.getcwd() + fss.url(file))
         try:
             answer = detect_allergens(file_url)
-        except:
-            answer = "Oops! An error occured and the picture could not be scanned properly."
+        except Exception as exc:
+            answer = f"Scan failed: {exc}"
         return render(request, "aller_scan/results.html", {
             'img_url': og_url,
             'answer': answer.strip().replace("\n", "<br>")

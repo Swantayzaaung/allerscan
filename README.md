@@ -6,16 +6,24 @@ Food scanner web application that extracts ingredient text from an image and ret
 
 ![AllerScan homepage](docs/homepage-screenshot.png)
 
+## Sample Result
+
+![AllerScan result page](docs/results-screenshot.png)
+
+## Program Flow
+
+![AllerScan program flow](docs/program-flow.png)
+
 ## Tech Stack
 
 - Python 3
 - Django 4.1.4
 - OpenCV + Tesseract OCR
-- OpenAI API
+- Groq API (OpenAI-compatible endpoint)
 
 ## Project Structure
 
-- `allerscan/`: Django project config (`settings.py`, `urls.py`, `wsgi.py`, `asgi.py`)
+- `config/`: Django project config (`settings.py`, `urls.py`, `wsgi.py`, `asgi.py`)
 - `aller_scan/`: Main app (views, templates, scanner logic, static files)
 
 ## Setup
@@ -59,7 +67,8 @@ cp .env.example .env
 
 Required:
 
-- `OPENAI_API_KEY`: your OpenAI API key
+- `GROQ_API_KEY`: your Groq API key
+- `GROQ_MODEL`: model name (default: `llama-3.1-8b-instant`)
 
 Optional:
 

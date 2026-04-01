@@ -1,16 +1,18 @@
 #Made by Thaw Zin Thant , Ai dev at Byte Busters team (Hub and Hack 2023 competition)
 
-import pytesseract
+import os
+
 import cv2
 import numpy as np
-import os
 import openai
+import pytesseract
 from dotenv import load_dotenv
 
 load_dotenv()
 
-path_to_tesseract = os.getenv("TESSERACT_CMD", r"C:\Program Files\Tesseract-OCR\tesseract.exe")
-pytesseract.pytesseract.tesseract_cmd = path_to_tesseract
+path_to_tesseract = os.getenv("TESSERACT_CMD")
+if path_to_tesseract:
+    pytesseract.pytesseract.tesseract_cmd = path_to_tesseract
 
 text = """"""
 
@@ -50,9 +52,10 @@ class Allergy():
         self.text = pytesseract.image_to_string(img, config=config)
 
     def chatgpt(self):
-        openai.api_key = os.getenv("OPENAI_API_KEY")
+        openai.api_key = os.getenv("GROQ_API_KEY")
+        openai.api_base = os.getenv("GROQ_API_BASE", "https://api.groq.com/openai/v1")
         if not openai.api_key:
-            raise ValueError("OPENAI_API_KEY is not set. Add it in your .env file.")
+            raise ValueError("GROQ_API_KEY is not set. Add it in your .env file.")
         
         messages = [
             {"role": "system", "content": "You are a kind helpful assistant."},
@@ -60,13 +63,19 @@ class Allergy():
         
         message = self.text
         
-        if message:
-            messages.append(
-                {"role": "user", "content": f"If it contains the word Ingredients, use at least 5 explanations to show possible Allergies of : {message}"},
-            )
+        if not message or not message.strip():
+            raise ValueError("OCR could not extract readable ingredient text from this image.")
+
+        messages.append(
+            {"role": "user", "content": f"If it contains the word Ingredients, use at least 5 explanations to show possible Allergies of : {message}"},
+        )
+        try:
             chat = openai.ChatCompletion.create(
-                model="gpt-3.5-turbo", messages=messages
+                model=os.getenv("GROQ_MODEL", "llama-3.1-8b-instant"),
+                messages=messages,
             )
+        except Exception as exc:
+            raise RuntimeError(f"Groq request failed: {exc}") from exc
 
         reply = chat.choices[0].message.content
         return reply
